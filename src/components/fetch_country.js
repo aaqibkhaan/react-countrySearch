@@ -8,30 +8,44 @@ class FetchCountries extends Component {
 	componentDidMount(){
 		this.props.fetchCountries();
 	}
-/*
+
 	renderCountries() {
-		return _.map(this.props.countries , country => {
+
+		const { countries } = this.props;
+		
+
+		return _.map(countries , country =>{
+
 			return (
-					<li className="list-group-item">
-							{country.capital}
-					</li>
+			<tr key={country.name.official}>
+				<td> {country.name.official} </td>
+				<td> {country.capital} </td>
+				<td> {country.region} </td>
+				<td> {country.subregion} </td>
+			</tr>
 				);
 
 		});
 
-
-	}*/
+	}
 
 	render() {
-		console.log(this.props.countries);
 
 		return(
 
-			<div>
-				<h3>Fetching Countries Data</h3>
-				<ul className="list-group">
-				</ul>
-			</div>
+			<table className="table table-hover">
+				<thead className="thead-dark">
+					<tr>
+					<th scope="col">Countries</th>
+					<th scope="col">Capital</th>
+					<th scope="col">Region</th>
+					<th scope="col">SubRegion</th>
+					</tr>
+				</thead>
+				<tbody>
+				{this.renderCountries()}
+				</tbody>
+			</table>
 			);
 
 	}
