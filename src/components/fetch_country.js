@@ -19,39 +19,43 @@ class FetchCountries extends Component {
 
     renderCountries() {
         const { countries } = this.props;
-        const searchTerm = this.state.searchValue;
-        const filteredCountries = _.pickBy( countries , country => {
-            if(country.name.official.indexOf(searchTerm) > -1 || country.capital.indexOf(searchTerm) > -1 || country.region.indexOf(searchTerm) || country.subregion.indexOf(searchTerm) > -1 )
-            {
+        const searchValue = this.state.searchValue;
+        const filteredCountries = _.filter( countries , country => {
+            if (country.name.official.indexOf(searchValue) > -1 || country.capital.indexOf(searchValue) > -1 || country.region.indexOf(searchValue) > -1 || country.subregion.indexOf(searchValue) > -1 ) {
                 return country;
-
-
             }
+
         });
 
-        return  _.map(filteredCountries , (country) => {
-             return (
-                        <tr key={country.name.official}>
+
+
+        return (_.map(filteredCountries, (country) => {
+
+            return(
+                  <tr key={country.name.official}>
                         <td> {country.name.official} </td>
                         <td> {country.capital} </td>
                         <td> {country.region} </td>
                         <td> {country.subregion} </td>
-                        </tr>
-                    );
-         })
+                        </tr>);
+
+        }));
+
     }
+
+
 
     handleSearchTerm(term) {
         this.setState({searchValue : term});
     }
 
     render() {
-		const handleSearchTerm = _.debounce((term) => {this.handleSearchTerm(term) }, 100); 
-
+		
     return(
     	
             <div>
-                <SearchBar onSearchTermChange= { handleSearchTerm}/>
+                <SearchBar onSearchTermChange= {this.handleSearchTerm}/>
+                
                 <table className="table table-hover">
                 <thead className="thead-dark">
                 <tr>
