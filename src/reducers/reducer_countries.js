@@ -5,7 +5,7 @@ export default function (state = {} , action) {
 	switch(action.type){
 		
 		case FETCH_COUNTRIES:
-		return _.mapKeys(action.payload.data, 'capital');
+		return action.payload.data;
 
 
 		default:

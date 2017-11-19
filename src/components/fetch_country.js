@@ -20,18 +20,14 @@ class FetchCountries extends Component {
     renderCountries() {
         const { countries } = this.props;
         const searchValue = this.state.searchValue;
-        const filteredCountries = _.filter( countries , country => {
+        return _.filter( countries , country => {
             if (country.name.official.indexOf(searchValue) > -1 || country.capital.indexOf(searchValue) > -1 || country.region.indexOf(searchValue) > -1 || country.subregion.indexOf(searchValue) > -1 ) {
+             console.log(country);
                 return country;
             }
 
-        });
-
-
-
-        return (_.map(filteredCountries, (country) => {
-
-            return(
+        }).map(country => {
+              return(
                   <tr key={country.name.official}>
                         <td> {country.name.official} </td>
                         <td> {country.capital} </td>
@@ -39,9 +35,11 @@ class FetchCountries extends Component {
                         <td> {country.subregion} </td>
                         </tr>);
 
-        }));
 
-    }
+        });
+
+
+        };
 
 
 
@@ -50,6 +48,8 @@ class FetchCountries extends Component {
     }
 
     render() {
+
+        console.log(this.props.countries);
 		
     return(
     	
